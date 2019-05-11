@@ -8,8 +8,6 @@ import org.apereo.cas.authentication.exceptions.InvalidLoginLocationException;
 import org.apereo.cas.authentication.handler.support.AbstractUsernamePasswordAuthenticationHandler;
 import org.apereo.cas.authentication.principal.PrincipalFactory;
 import org.apereo.cas.services.ServicesManager;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.security.auth.login.AccountLockedException;
 import javax.security.auth.login.FailedLoginException;
@@ -73,7 +71,8 @@ public class MyAuthenticationHandler extends AbstractUsernamePasswordAuthenticat
 
             if(rs.next()) {
                 //允许登录，并且通过this.principalFactory.createPrincipal来返回用户属性
-                return createHandlerResult(credential, this.principalFactory.createPrincipal(username, Collections.emptyMap()), null);
+                return createHandlerResult(credential, this.principalFactory.createPrincipal(username, Collections
+                        .emptyMap()), Collections.emptyList());
             }
         } catch (Exception e) {
             // TODO Auto-generated catch block
