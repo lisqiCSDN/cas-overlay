@@ -14,6 +14,7 @@ import javax.security.auth.login.FailedLoginException;
 import java.security.GeneralSecurityException;
 import java.sql.*;
 import java.util.Collections;
+import java.util.HashMap;
 
 /**
  * @ClassName: MyAuthenticationHandler
@@ -70,9 +71,10 @@ public class MyAuthenticationHandler extends AbstractUsernamePasswordAuthenticat
             ResultSet rs = ps.executeQuery();
 
             if(rs.next()) {
+                //返回自定义值
+                HashMap hashMap = new HashMap();
                 //允许登录，并且通过this.principalFactory.createPrincipal来返回用户属性
-                return createHandlerResult(credential, this.principalFactory.createPrincipal(username, Collections
-                        .emptyMap()), Collections.emptyList());
+                return createHandlerResult(credential, this.principalFactory.createPrincipal(username, hashMap), Collections.emptyList());
             }
         } catch (Exception e) {
             // TODO Auto-generated catch block
